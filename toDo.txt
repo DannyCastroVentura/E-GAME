@@ -1,0 +1,42 @@
+Create + missions;
+
+Create + trains;
+
+Create Train:
+    - Only Xp, and will have time to do this, like, 
+    missions but the more xp u gain the more time 
+    you will to be waiting;
+    - Some training only get unlocked after something (IDEA)
+
+Missions:
+    - Get Xp, gold and possibly champions, depending on the
+    missions difficulty, the item drop will increase.
+    - Some of the missions are ethically good and others are
+    ethically bad, by doing those the moral of the summoner 
+    is going to change and from a certain point of ethically
+    things can happen diferently (IDEA)
+
+Bag:
+    - items;
+
+Items:
+    - Xp booster;
+    - Gold booster;
+    - Item drop booster;
+    - Bag of gold;
+    - Bag of xp;
+
+
+Percentage of champions:
+    - 50% COMMON
+    - 25% UNCOMMON
+    - 12.5% RARE
+    - 6.25% EPIC
+    - 3.125% LEGEMDARY
+    - 1.5625% MYTHIC
+
+
+Drops:
+    - If u get a champion that u already have, he increases 
+    one star, and become stronger;
+

@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>E-Game</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="./css/signin.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body class="login-body">
+
+  <div hidden id="spinner"></div>
+  <div id="snackbar">Some text some message..</div>
+  <div id="loginPage" class="form-signin mainPage">
+    <main>
+      <div id="tab-login" class="text-center tab-signinOrLogin w3-animate-opacity">
+        <form onsubmit="return false;">
+          <img class="mb-3 iconEGame">
+
+          <div class="form-floating ">
+            <input type="email" class="form-control firstInForm" id="login-email" placeholder="name@example.com"
+              required>
+            <label for="login-email">Email address</label>
+          </div>
+          <div class="form-floating ">
+            <input type="password" class="form-control lastInForm" id="login-password" placeholder="Password" required>
+            <label for="login-password">Password</label>
+          </div>
+
+          <button class="w-100 btn btn-lg btn-game" type="submit" onclick="loginUser();">Login</button>
+
+          <div class="checkbox m-3">
+            <span>
+              Don't have an account? Sign in<a onclick="openSignin();"> here</a>!
+            </span>
+          </div>
+          <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+        </form>
+      </div>
+
+      <div id="tab-signin" class="text-center tab-signinOrLogin w3-animate-opacity" hidden>
+        <form onsubmit="return false;">
+          <img class="mb-3 iconEGame">
+          <div class="form-floating ">
+            <input type="text" class="form-control firstInForm" id="signin-name" required
+              placeholder="First and last name">
+            <label for="signin-name">Name</label>
+          </div>
+          <div class="form-floating ">
+            <input type="email" class="form-control betweenForm" id="signin-email" required
+              placeholder="name@example.com">
+            <label for="signin-email">Email address</label>
+          </div>
+          <div class="form-floating ">
+            <input type="password" class="form-control betweenForm" id="signin-password" required
+              placeholder="Password">
+            <label for="signin-password">Password</label>
+          </div>
+          <div class="form-floating ">
+            <input type="password" class="form-control lastInForm" id="signin-password-confirm" required
+              placeholder="Confirm password">
+            <label for="signin-password-confirm">Confirm password</label>
+          </div>
+
+          <button class="w-100 btn btn-lg btn-game" onclick="registerUser();" type="submit">Sign in</button>
+
+          <div class="checkbox m-3">
+            <span>
+              Already have an account? Log in<a onclick="openLogin();" id="aOpenLogin"> here</a>!
+            </span>
+          </div>
+          <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Home page -->
+  <div id="homePage" class="mainPage" hidden>
+
+    <!-- home page page -->
+    <div id="homeHomePage" class="tabsOfHome">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2 px-5">
+          <a class="navbar-brand me-auto"><span id="goldIndicator">00000</span> <i class="fas fa-coins"></i></a>
+        </div>
+        <div class="mx-auto order-0">
+          <a onclick="window.location.reload();"><img class="iconEGame"
+              style="width: 150px; height: 50px; content: url(./../img/icon/E-Game-gold.png);"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 px-5">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" onclick="openTrainTab();" href="#">Train</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onclick="openMissionsTab();" href="#">Missions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onclick="openBagTab();" href="#">Bag</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onclick="openArmyTab();" href="#">Army</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Profile
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+                aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Summoner</a></li>
+                <li><a class="dropdown-item" href="#">Change password</a></li>
+                <li><a class="dropdown-item" onclick="logout();" href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+
+      <div id="trainTab" hidden class="container py-3 homeTabsPage">
+        <div class="d-flex justify-content-center row row-cols-1 row-cols-md-2 m-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Train</h4>
+              </div>
+              <div class="card-body">
+                <ul id="ul-trains-list" class="list-unstyled mt-3 mb-4 ">
+                  <!-- vai aparecer aqui o conteudo devido a função appendTrain(); -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="missionsTab" class="container py-3 homeTabsPage">
+        <div class="d-flex justify-content-center row row-cols-1 row-cols-md-2 m-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Missions</h4>
+              </div>
+              <div class="card-body">
+                <ul id="ul-missions-list" class="list-unstyled mt-3 mb-4 ">
+                  <!-- vai aparecer aqui o conteudo devido a função appendMissions(); -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="bagTab" hidden class="container py-3 homeTabsPage">
+        <div class="d-flex justify-content-center row row-cols-1 row-cols-md-2 m-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Bag</h4>
+              </div>
+              <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>{{BAG.ITEM}}</li>
+                  <li>{{BAG.ITEM}}</li>
+                  <li>{{BAG.ITEM}}</li>
+                  <li>{{BAG.ITEM}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="armyTab" hidden class="container py-3 homeTabsPage">
+        <div class="d-flex justify-content-center row m-3 text-center">
+          <div class="py-3 text-center">
+            <h2 class="pb-5">Your army!</h2>
+            <div id="armyTabContainer" class="row text-center d-flex justify-content-center">
+              <!-- vai aparecer aqui o conteudo devido a função checkArmy(); -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                class="fab fa-instagram"></i></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                class="fab fa-linkedin-in"></i></a>
+
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+          </section>
+          <!-- Section: Social media -->
+
+          <!-- Section: Text -->
+          <section class="mb-4">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+              repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+              eum harum corrupti dicta, aliquam sequi voluptate quas.
+            </p>
+          </section>
+          <!-- Section: Text -->
+
+          <!-- Section: Links -->
+          <section class="">
+            <!--Grid row-->
+            <div class="row">
+              <!--Grid column-->
+              <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#!" class="text-white">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+              <!--Grid column-->
+
+              <!--Grid column-->
+              <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#!" class="text-white">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+              <!--Grid column-->
+
+              <!--Grid column-->
+              <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#!" class="text-white">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+              <!--Grid column-->
+
+              <!--Grid column-->
+              <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#!" class="text-white">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#!" class="text-white">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+          </section>
+          <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2020 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+    </div>
+
+    <!-- Choose class page -->
+    <div id="chooseClassHomePage" class="container py-3 tabsOfHome text-center">
+      <img class="mt-5" src="./img/icon/E-Game.png" alt="" width="300" height="110" style="object-fit: cover;">
+      <h2 class="pb-5">Choose your class!</h2>
+      <div id="mainContainerForGetUsersClass" class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <!-- vai aparecer aqui o conteudo devido a função getUserClasses(); -->
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="./assets/js/bootstrap.bundle.js"></script>
+  <script src="https://unpkg.com/bootstrap-modbox"></script>
+  <script src="./js/bootstrap-modbox.js"></script>
+  <script>
+
+
+    //colors
+    const wrong = '#dc3545';
+    const eGameColor = '#f2ad56';
+
+
+    //tabs
+    const loginOrSigninTabs = document.getElementsByClassName("tab-signinOrLogin");
+    const mainPage = document.getElementsByClassName("mainPage");
+    const homeTabsPage = document.getElementsByClassName("homeTabsPage");
+
+    //signin
+    const signinName = document.getElementById("signin-name");
+    const signinEmail = document.getElementById("signin-email");
+    const signinPassword = document.getElementById("signin-password");
+    const signinPasswordConfirm = document.getElementById("signin-password-confirm");
+    const aOpenLogin = document.getElementById("aOpenLogin");
+
+    //login    
+    const loginEmail = document.getElementById("login-email");
+    const loginPassword = document.getElementById("login-password");
+
+    //homePage
+    const tabsOfHome = document.getElementsByClassName("tabsOfHome");
+
+    //snackbar        
+    const snackbar = document.getElementById("snackbar");
+
+    //spinner
+    const spinner = document.getElementById("spinner");
+
+    checkToken();
+
+    getAll();
+
+    function openSignin() {
+      changeTab('tab-signin', loginOrSigninTabs);
+    }
+
+    function openLogin() {
+      changeTab('tab-login', loginOrSigninTabs);
+    }
+
+    async function openHomePage() {
+      const decodedToken = await decodeJwt();
+      changeTab('homePage', mainPage);
+      document.body.classList.remove('login-body');
+      document.getElementById("goldIndicator").innerText = decodedToken.decoded.gold;
+    }
+
+    function openLoginPage() {
+      changeTab('loginPage', mainPage);
+      document.body.classList.add('login-body');
+    }
+
+    function openTrainTab() {
+      changeTab('trainTab', homeTabsPage);
+      checkTrain();
+    }
+
+    function openMissionsTab() {
+      changeTab('missionsTab', homeTabsPage);
+      checkMissions();
+    }
+
+    function openBagTab() {
+      changeTab('bagTab', homeTabsPage);
+    }
+
+    function openArmyTab() {
+      changeTab('armyTab', homeTabsPage);
+      checkArmy();
+    }
+
+    function getAll() {
+      getUserClasses();
+    }
+
+    async function checkArmy() {
+      const token = await decodeJwt();
+      const email = token.decoded.email;
+      const url = "/getUsersChampions?email=" + email, method = 'GET';
+      const response = await fetchWithParams(url, method);
+      document.getElementById('armyTabContainer').innerText = "";
+      appendArmy(response.rows, 'armyTabContainer', token.decoded);
+    }
+
+    async function checkTrain() {
+      const token = await decodeJwt();
+      const email = token.decoded.email;
+      let url = "/getUsersChampions?email=" + email, method = 'GET';
+      const userChampions = await fetchWithParams(url, method);
+      url = "/getUsersTrains?email=" + email, method = 'GET';
+      const response = await fetchWithParams(url, method);
+      document.getElementById('ul-trains-list').innerText = "";
+      appendTrains(response.result, 'ul-trains-list', userChampions, email);
+    }
+
+    async function checkMissions() {
+      const token = await decodeJwt();
+      const email = token.decoded.email;
+      let url = "/getUsersChampions?email=" + email, method = 'GET';
+      const userChampions = await fetchWithParams(url, method);
+      url = "/getUsersMissions?email=" + email, method = 'GET';
+      const response = await fetchWithParams(url, method);
+      console.log();
+      if (response.result.length < 10) {
+        //não tem missões ainda
+        const addMissions = await addMissionsToThisUser(email);
+      }
+      const getMissions = await getMissionsOfThisUser(email, userChampions);
+    }
+
+    async function addMissionsToThisUser(email) {
+      const url = "/addMissionsToThisUser", method = 'POST', body = JSON.stringify({ email });
+      const response = await fetchWithParams(url, method, body);
+      return response;
+    }
+
+    async function getMissionsOfThisUser(email, userChampions) {
+      const url = "/getUsersMissions?email=" + email, method = 'GET';
+      const response = await fetchWithParams(url, method);
+      document.getElementById('ul-missions-list').innerText = "";
+      appendMissions(response.result, 'ul-missions-list', userChampions);
+      return response;
+    }
+
+
+    async function getUserClasses() {
+      const url = "/getUserClasses", method = 'GET';
+      const response = await fetchWithParams(url, method);
+      appendClasses(response.result, 'mainContainerForGetUsersClass');
+    }
+
+    function appendClasses(data, containerId) {
+      const mainContainer = document.getElementById(containerId);
+      for (let i = 0; i < data.length; i++) {
+        //Name
+        const col = document.createElement("div");
+        col.classList.add('col');
+        const card_mb4_rounded3_shadow = document.createElement("div");
+        card_mb4_rounded3_shadow.classList.add('card', 'mb-4', 'rounded-3', 'shadow-choose-class');
+        card_mb4_rounded3_shadow.onclick = () => {
+          chooseClass(data[i].idclass, data[i].starterchampion);
+        };
+        const cardHeader_py3 = document.createElement("div");
+        cardHeader_py3.classList.add('card-header', 'py-3');
+        const my0_fwNormal = document.createElement("h3");
+        my0_fwNormal.classList.add('my-0', 'fw-normal');
+        my0_fwNormal.innerText = data[i].name;
+
+        //image
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+        const imageTitle = document.createElement('p');
+        imageTitle.innerText = 'Starting champion:';
+        imageTitle.style.fontWeight = '700';
+        const img = document.createElement('img');
+        img.classList.add('imgChooseClass');
+        img.src = data[i].image;
+
+        //description
+        const cardBody_secundaryDiv_borderTop = document.createElement('div');
+        const descriptionTitle = document.createElement('p');
+        descriptionTitle.innerText = 'Perk:';
+        descriptionTitle.style.fontWeight = '700';
+        const descriptionContent = document.createElement('p');
+        descriptionContent.innerText = data[i].description;
+        cardBody_secundaryDiv_borderTop.classList.add('card-body', 'secundaryDiv', 'border-top');
+
+        //button
+        const button = document.createElement('button');
+        button.classList.add('w-100', 'btn', 'btn-lg', 'btn-outline-game');
+        button.innerText = "Choose";
+
+        cardHeader_py3.appendChild(my0_fwNormal);
+        cardBody.appendChild(imageTitle);
+        cardBody.appendChild(img);
+        card_mb4_rounded3_shadow.appendChild(cardHeader_py3);
+        card_mb4_rounded3_shadow.appendChild(cardBody);
+        cardBody_secundaryDiv_borderTop.appendChild(descriptionTitle);
+        cardBody_secundaryDiv_borderTop.appendChild(descriptionContent);
+        card_mb4_rounded3_shadow.appendChild(cardBody_secundaryDiv_borderTop);
+        card_mb4_rounded3_shadow.appendChild(button);
+        col.appendChild(card_mb4_rounded3_shadow);
+
+        mainContainer.appendChild(col);
+      }
+    }
+
+    function appendArmy(data, containerId, token) {
+      const mainContainer = document.getElementById(containerId);
+      let champion = 0;
+      for (let i = 0; i < data.length; i++) {
+        champion = JSON.parse(data[i].champion);
+        //card
+        const col = document.createElement("div");
+        col.classList.add('col');
+        col.style.maxWidth = "30rem";
+        const card_mb4_rounded3_shadow = document.createElement("div");
+        card_mb4_rounded3_shadow.classList.add('card', 'mb-4', 'rounded-3');
+        card_mb4_rounded3_shadow.onclick = () => {
+          console.log("clicou no champion " + JSON.parse(data[i].champion)[0].chmpname);
+        };
+
+        const cardHeader_py3 = document.createElement("div");
+        cardHeader_py3.classList.add('card-header', 'py-3');
+        const my0_fwNormal = document.createElement("h3");
+        my0_fwNormal.classList.add('my-0', 'fw-normal');
+        my0_fwNormal.innerText = champion[0].chmpname;
+
+        //image
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+        const img = document.createElement('img');
+        img.classList.add('imgChooseClass');
+        let rarityColor = "darkgrey";
+
+        if (champion[0].rarity == 2) {
+          rarityColor = "darkgreen";
+        } else if (champion[0].rarity == 3) {
+          rarityColor = "darkblue";
+        } else if (champion[0].rarity == 4) {
+          rarityColor = "purple";
+        } else if (champion[0].rarity == 5) {
+          rarityColor = "orange";
+        } else if (champion[0].rarity == 6) {
+          rarityColor = "gold";
+        }
+
+        img.style.backgroundColor = rarityColor;
+        cardBody.style.backgroundColor = rarityColor;
+        img.src = champion[0].image;
+        img.classList.add('imgArmy');
+
+        //description
+        const cardBody_secundaryDiv_borderTop = document.createElement('div');
+        const descriptionTitle = document.createElement('p');
+        descriptionTitle.innerText = 'Level: ' + parseInt(data[i].level);
+        descriptionTitle.style.fontWeight = '700';
+        const descriptionContent = document.createElement('ul');
+        descriptionContent.classList.add('list-group');
+        const li1 = document.createElement('li'), li2 = document.createElement('li'), li3 = document.createElement('li');
+        li1.classList.add('list-group-item');
+        li2.classList.add('list-group-item');
+        li3.classList.add('list-group-item');
+
+        li1.innerText = "Health: " + (token.healthBoost * (champion[0].basehealth + data[i].level * champion[0].perlevelhealth));
+        li2.innerText = "Atack: " + (token.atackBoost * (champion[0].baseatack + data[i].level * champion[0].perlevelatack));
+        li3.innerText = "Atack speed: " + (token.atackSpeedBoost * (champion[0].baseatackspeed + data[i].level * champion[0].perlevelatackspeed));
+
+        cardBody_secundaryDiv_borderTop.classList.add('card-body', 'secundaryDiv', 'border-top');
+
+
+        cardHeader_py3.appendChild(my0_fwNormal);
+        cardBody.appendChild(img);
+        card_mb4_rounded3_shadow.appendChild(cardHeader_py3);
+        card_mb4_rounded3_shadow.appendChild(cardBody);
+        cardBody_secundaryDiv_borderTop.appendChild(descriptionTitle);
+        cardBody_secundaryDiv_borderTop.appendChild(descriptionContent);
+        descriptionContent.appendChild(li1);
+        descriptionContent.appendChild(li2);
+        descriptionContent.appendChild(li3);
+        card_mb4_rounded3_shadow.appendChild(cardBody_secundaryDiv_borderTop);
+        col.appendChild(card_mb4_rounded3_shadow);
+        mainContainer.appendChild(col);
+      }
+    }
+
+
+    function appendTrains(data, containerId, userChampions, email) {
+      const mainContainer = document.getElementById(containerId);
+      appendUl(data, mainContainer, userChampions, email);
+    }
+
+    function appendMissions(data, containerId, userChampions) {
+      const mainContainer = document.getElementById(containerId);
+      const email = data[0].email;
+      appendUl(data, mainContainer, userChampions, email);
+    }
+
+    function appendUl(data, mainContainer, userChampions, email) {
+      const lvls = 15;
+      const lvlsDifference = parseInt(360 / lvls);
+      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        let missionOrTrain = "Mission";
+        let id = data[i].idmission;
+        let title = 'Launch Mission';
+        let type = 'launchMission';
+        let countdownidText = id + "|" + data[i].received + "|" + missionOrTrain;
+        if (data[i].idmission === undefined) {
+          missionOrTrain = "Train";
+          id = data[i].idtrain;
+          title = 'Launch Train';
+          type = 'launchTrain';
+          countdownidText = id + "|" + missionOrTrain;
+        }
+        let difficultyColor = (lvlsDifference * data[i].difficulty);
+        const square = document.createElement('i');
+        square.classList.add('fas', 'fa-square-full', 'float-end');
+        const color = "hsl(" + difficultyColor + ", 100%, 50%)";
+        square.style.color = color;
+
+        const countDown = document.createElement('span');
+        countDown.id = countdownidText;
+        countDown.classList.add('float-start');
+        countDown.style.color = 'red';
+
+        const li = document.createElement("li");
+        li.classList.add('list-group-item', 'list-group-item-action');
+        li.style.cursor = "pointer";
+        li.innerText = data[i].description + " ";
+        li.onclick = () => {
+          const topBody = createTopBody(data[i], color);
+          const select = 'Choose your champion: ' + createSelect(userChampions);
+          const body = '<div class = "text-center" >' + topBody + select + '</div>';
+          if (data[i].started !== true) {
+            createCustomModal('myModal', 'dark', title, body, type, data[i], email);
+          }
+        };
+
+        li.appendChild(square);
+        li.appendChild(countDown);
+        mainContainer.appendChild(li);
+        if (data[i].started === true) {
+          const started = new Date(data[i].timestarted.replace(' ', 'T'));
+          clockInterval(started.getTime(), data[i].duration, countdownidText);
+        }
+      }
+    }
+
+    function createTopBody(data, color) {
+      let topBody = "<div>";
+      topBody += createDifficulty(data.difficulty, color);
+      topBody += createEarnings(data);
+      topBody += createDurations(data.duration);
+      topBody += "</div><br>";
+      return topBody;
+    }
+
+    function createDifficulty(difficulty, color) {
+      let returnDifficulty = "<span class = 'p-3' style = 'white-space: nowrap;' >Difficulty: " + difficulty + ' <i class="fas fa-exclamation-triangle" style = "color: ' + color + ';"></i></span>';
+      return returnDifficulty;
+    }
+
+    function createEarnings(data) {
+      let earnings;
+      if (data.gold !== undefined) {
+        earnings = "<span class = 'p-3' style = 'white-space: nowrap;' >Earnings: <span style = 'font-weight: 700'>" + data.gold + "</span> <i class='fas fa-coins' style = 'color: #f2ad56;' ></i> and <span style = 'font-weight: 700'>" + data.xp + "</span> <i class='fas fa-flask' style = 'color: #0488D0;' ></i></span>";
+      } else {
+        earnings = "<span class = 'p-3' style = 'white-space: nowrap;' >Earnings: <span style = 'font-weight: 700'>" + data.xp + "</span> <i class='fas fa-flask' style = 'color: #0488D0;' ></i></span>";
+      }
+      return earnings;
+    }
+
+    function createDurations(duration) {
+      let returnDuration = "<span class = 'p-3' style = 'white-space: nowrap;' >Duration: " + duration + 'h <i class="fas fa-clock" style = "color: grey;"></i></span>';
+      return returnDuration;
+    }
+
+
+    function createSelect(userChampions) {
+      let select = "<select class = 'select' id = 'championChoosen' >";
+      userChampions.rows.forEach((champion, index) => {
+        const lvl = champion.level;
+        const name = JSON.parse(champion.champion)[0].chmpname;
+        const idChampion = JSON.parse(champion.champion)[0].idchampion;
+        select += "<option value = '" + idChampion + "'> " + name + " | lvl: " + lvl + " </option>";
+      });
+      select += "</select>";
+      return select;
+    }
+
+
+
+    async function missionLaunching(idMission, idChampion, email, duration, received) {
+      //code to launch the misssion      
+      const url = "/startMission", method = 'POST', body = JSON.stringify({ idMission, idChampion, email });
+      const response = await fetchWithParams(url, method, body);
+      console.log(response);
+      if (response.result === true) {
+        const started = new Date().getTime();
+        const countdownId = idMission + "|" + received + "|Mission";
+        clockInterval(started, duration, countdownId);
+      } else {
+        console.log('Algo não correu bem');
+      }
+    }
+
+    async function trainLaunching(idTrain, idChampion, email, duration) {
+      //code to launch the train
+      const url = "/startTrain", method = 'POST', body = JSON.stringify({ idTrain, idChampion, email });
+      const response = await fetchWithParams(url, method, body);
+      console.log(response);
+      if (response.result === true) {
+        const started = new Date().getTime();
+        const countdownId = idTrain + "|Train";
+        clockInterval(started, duration, countdownId);
+      } else {
+        console.log('Algo não correu bem');
+      }
+    }
+
+    async function registerUser() {
+      const name = signinName.value;
+      const email = signinEmail.value;
+      const password = signinPassword.value;
+      const passwordConfirm = signinPasswordConfirm.value;
+      if (passwordConfirm != password) {
+        //mostrar erro
+      } else {
+        const url = '/registerUser', method = 'POST', body = JSON.stringify({ name, email, password });
+        return await fetchWithParams(url, method, body).then((response) => {
+          if (response.result) {
+            //mostrar que deu certo
+            prompt('Sign in successful!');
+            aOpenLogin.click();
+            signinName.value = "";
+            signinEmail.value = "";
+            signinPassword.value = "";
+            signinPasswordConfirm.value = "";
+          } else {
+            //não deu, mostrar ao user
+            prompt('User already registered!', wrong);
+          }
+        });
+
+      }
+    }
+
+    async function loginUser() {
+      const email = loginEmail.value;
+      const password = loginPassword.value;
+      const url = '/loginUser', method = 'POST', body = JSON.stringify({ email, password });
+      return await fetchWithParams(url, method, body).then((response) => {
+        if (response.result) {
+          const idClass = response.idClass;
+          sessionStorage.setItem('token', response.token);
+          //mostrar que deu certo
+          prompt('Login successful!');
+          openHomePage();
+          verificarSeJaEscolheuASuaClasse(idClass);
+          loginEmail.value = "";
+          loginPassword.value = "";
+        } else {
+          //não deu, mostrar ao user
+          prompt('Wrong email or password!', wrong);
+
+        }
+      })
+    }
+
+    async function fetchWithParams(url, method, body) {
+      spinner.removeAttribute('hidden');
+      if (!body) {
+        return await fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            spinner.setAttribute('hidden', '');
+            return data;
+          })
+          .catch((err) => {
+            console.log(err);
+            return err;
+          });
+      } else {
+        return await fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: body
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            spinner.setAttribute('hidden', '');
+            return data;
+          })
+          .catch((err) => {
+            console.log(err);
+            return err;
+          });
+      }
+
+    }
+
+    async function checkToken() {
+      if (sessionStorage.getItem('token') !== null) {
+        const token = await decodeJwt();
+        const email = token.decoded.email;
+        const idClass = token.decoded.idClass;
+        //está logado
+        openHomePage();
+        verificarSeJaEscolheuASuaClasse(idClass);
+      } else {
+        //não está logado
+        logout();
+      }
+    }
+
+    function verificarSeJaEscolheuASuaClasse(idClass) {
+      if (idClass !== null) {
+        //enviar para o home page
+        changeTab('homeHomePage', tabsOfHome);
+        openMissionsTab();
+      } else {
+        //perguntar qual a classe que quer escolher
+        changeTab('chooseClassHomePage', tabsOfHome);
+      }
+    }
+
+    async function decodeJwt() {
+      const url = '/decodeJwt', method = 'POST', body = JSON.stringify({ "token": sessionStorage.getItem('token') });
+      const responseAwait = await fetchWithParams(url, method, body);
+      return responseAwait;
+    }
+
+    async function updateToken(email) {
+      const url = '/updateToken', method = 'POST', body = JSON.stringify({ "email": email });
+      const responseAwait = await fetchWithParams(url, method, body);
+      sessionStorage.setItem('token', responseAwait.token);
+    }
+
+    function logout() {
+      sessionStorage.removeItem('token');
+      openLoginPage();
+    }
+
+    function changeTab(tabId, tabsReceived) {
+      [].forEach.call(tabsReceived, (element) => { element.hidden = true; });
+      document.getElementById(tabId).hidden = false;
+    }
+
+    async function chooseClass(idUserClassChose, idChampion) {
+      const token = await decodeJwt();
+      const email = token.decoded.email;
+      let url = '/chooseClass', method = 'POST', body = JSON.stringify({ email: email, idClass: idUserClassChose });
+      const responseChooseClass = await fetchWithParams(url, method, body);
+      if (responseChooseClass) {
+        await updateToken(email);
+        url = '/addUsersChampion', body = JSON.stringify({ email: email, idChampion: parseInt(idChampion) });
+        const responseAddChampion = await fetchWithParams(url, method, body);
+        if (responseAddChampion) {
+          window.location.reload();
+        }
+      }
+    }
+
+    function prompt(message, color) {
+      if (color !== undefined) {
+        snackbar.style.backgroundColor = color;
+      } else {
+        snackbar.style.backgroundColor = eGameColor;
+      }
+      snackbar.innerText = message;
+      snackbar.className = "show";
+      setTimeout(function () { snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+    }
+
+    function clockInterval(started, hoursplus, countdownId) {
+      const x = setInterval(() => {
+        //if (i % 10 == 0) {
+          const currentDate = new Date();
+          const now = currentDate.getTime();
+          const countDownDate = new Date(started + hoursplus * 60 * 60 * 1000).getTime();
+          // Get today's date and time
+
+          // Find the distance between now and the count down date
+          const distance = countDownDate - now;
+
+          // Time calculations for days, hours, minutes and seconds
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Output the result in an element with id=countdownId
+          document.getElementById(countdownId).innerText = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+          // If the count down is over, write some text 
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById(countdownId).innerText = "COMPLETED";
+          }
+
+       // }
+        
+      }, 1000);
+    }
+
+  </script>
+
+</body>
+
+</html>

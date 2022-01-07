@@ -1,0 +1,3 @@
+docker network create network
+docker build --tag e-game-db .
+docker run --rm -p 5433:5432 --network network --name e-game-db -e POSTGRES_PASSWORD=123 e-game-db
